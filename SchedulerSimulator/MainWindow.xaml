@@ -5,10 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchedulerSimulator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Path Data="M129.98374,175.92683 C148.9663,179.04896 166.12182,181.86674 181.62614,184.40983 327.61587,208.35573 327.20705,207.94699 327.20705,207.94699 L224.44298,258.67766 176.31282,205.34495" Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="129.984,175.927,0,159.321" Stretch="Fill" Stroke="Black" Width="198.223"/>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="83.154,75.764,0,0" VerticalAlignment="Top"/>
+        Title="MainWindow" Height="450" Width="807.2">
+  <Grid Margin="0,0,-0.2,-154">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="191*"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="198*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="16*"/>
+      <ColumnDefinition Width="108*"/>
+      <ColumnDefinition Width="677*"/>
+    </Grid.ColumnDefinitions>
+    <Button x:Name="button" Content="찾아보기..." HorizontalAlignment="Left" Height="25" Margin="570,47,0,0" VerticalAlignment="Top" Width="88" Click="button_Click" Grid.Column="2"/>
+    <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="25" Margin="0,47,0,0" TextWrapping="Wrap" Text="C:\data.txt" VerticalAlignment="Top" Width="656" Grid.ColumnSpan="2" Grid.Column="1"/>
+    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="0,20,0,0" TextWrapping="Wrap" Text="스케줄링 파일" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="16" Width="83" Grid.Column="1">
+      <TextBlock.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform/>
+          <SkewTransform/>
+          <RotateTransform Angle="-0.291"/>
+          <TranslateTransform/>
+        </TransformGroup>
+      </TextBlock.RenderTransform>
+    </TextBlock>
+    <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="0,86,0,0" TextWrapping="Wrap" Text="알고리즘" VerticalAlignment="Top" Height="16" Width="48" Grid.Column="1"/>
+    <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="304" Margin="0,106,0,0" VerticalAlignment="Top" Width="774" Grid.ColumnSpan="2" SelectionChanged="tabControl_SelectionChanged" Grid.RowSpan="3" Grid.Column="1">
+      <TabItem Header="FCFS" Width="120"/>
+      <TabItem Header="SJF" Width="95"/>
+      <TabItem Header="SRT" Width="95"/>
+      <TabItem Header="비선점 Priority" Width="170"/>
+      <TabItem Header="선점 Priority" Width="150"/>
+      <TabItem Header="HRN" Width="85"/>
+      <TabItem Header="RR" Width="55"/>
 
+
+    </TabControl>
+    <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Height="16" Margin="0,137,0,0" TextWrapping="Wrap" Text="간트 차트" VerticalAlignment="Top" Width="56" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+      <TextBlock.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform/>
+          <SkewTransform AngleY="-0.031"/>
+          <RotateTransform Angle="-0.851"/>
+          <TranslateTransform/>
+        </TransformGroup>
+      </TextBlock.RenderTransform>
+    </TextBlock>
+    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="23" Margin="0,163,0,0" Stroke="Black" VerticalAlignment="Top" Width="744" Grid.ColumnSpan="2" Grid.Column="1"/>
+    <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="0,191,0,0" TextWrapping="Wrap" Text="프로세스별 시간 정보" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="16" Width="130" Grid.Column="1"/>
+    <Grid Margin="22,316.6,484.8,-209.6" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="137*"/>
+        <RowDefinition Height="34*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="50*"/>
+        <ColumnDefinition Width="0"/>
+        <ColumnDefinition Width="0*"/>
+        <ColumnDefinition Width="50*"/>
+        <ColumnDefinition Width="38*"/>
+        <ColumnDefinition Width="114*"/>
+        <ColumnDefinition Width="6*"/>
+        <ColumnDefinition Width="0*"/>
+        <ColumnDefinition Width="19*"/>
+      </Grid.ColumnDefinitions>
+      <ListView x:Name="listView" HorizontalAlignment="Left" Width="396" SelectionChanged="listView_SelectionChanged" FontSize="22" Margin="16.8,-386,-234.4,346" Grid.ColumnSpan="5" Grid.Column="4">
+        <ListView.View>
+          <GridView>
+            <GridViewColumn Header="프로세스"/>
+            <GridViewColumn Header="반환시간"/>
+            <GridViewColumn Header="대기시간"/>
+            <GridViewColumn Header="응답시간"/>
+          </GridView>
+        </ListView.View>
+        <ListViewItem Content="P1" Margin="0" FontSize="16"/>
+        <ListViewItem Content="P2" Margin="0" FontSize="16"/>
+        <ListViewItem Content="P3" Margin="0" FontSize="16"/>
+        <ListViewItem Content="P4" Margin="0" FontSize="16"/>
+        <ListViewItem Content="P5" Margin="0" FontSize="16"/>
+        <ListViewItem Content="평균시간" Margin="0" FontSize="16"/>
+      </ListView>
     </Grid>
+    <Image x:Name="image" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="-68,62.2,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100"/>
+  </Grid>
 </Window>
