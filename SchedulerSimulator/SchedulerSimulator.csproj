@@ -55,6 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FirstComeFirstServed.cs" />
+    <Compile Include="HighestResponseRatioNext.cs" />
+    <Compile Include="NonPreemptivePriority.cs" />
+    <Compile Include="PreemptivePriority.cs" />
+    <Compile Include="Process.cs" />
+    <Compile Include="ProcessControlBlock.cs" />
+    <Compile Include="RoundRobin.cs" />
+    <Compile Include="Scheduler.cs" />
+    <Compile Include="ShortestJobFirst.cs" />
+    <Compile Include="ShortestRemainingTimeFirst.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,6 +96,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

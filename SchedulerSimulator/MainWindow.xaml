@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Path Data="M129.98374,175.92683 C148.9663,179.04896 166.12182,181.86674 181.62614,184.40983 327.61587,208.35573 327.20705,207.94699 327.20705,207.94699 L224.44298,258.67766 176.31282,205.34495" Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="129.984,175.927,0,159.321" Stretch="Fill" Stroke="Black" Width="198.223"/>
+        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="83.154,75.764,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

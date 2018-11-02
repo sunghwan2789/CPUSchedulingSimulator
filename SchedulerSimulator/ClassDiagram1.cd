@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SchedulerSimulator.FirstComeFirstServed">
+    <Position X="4" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>FirstComeFirstServed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchedulerSimulator.HighestResponseRatioNext">
+    <Position X="3.5" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>HighestResponseRatioNext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchedulerSimulator.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="6" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="scheduler" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SchedulerSimulator.NonPreemptivePriority">
+    <Position X="3.75" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>NonPreemptivePriority.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchedulerSimulator.PreemptivePriority">
+    <Position X="7.75" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>PreemptivePriority.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchedulerSimulator.Process">
+    <Position X="1.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAEAAAQAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Process.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchedulerSimulator.ProcessControlBlock">
+    <Position X="1.5" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAEEAAAAAAAAAgAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProcessControlBlock.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Process" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SchedulerSimulator.RoundRobin">
+    <Position X="7.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>RoundRobin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchedulerSimulator.Scheduler">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAIAAAAAAAAAAgAAAAKAAAAAAAAACAA=</HashCode>
+      <FileName>Scheduler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchedulerSimulator.ShortestJobFirst">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>ShortestJobFirst.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchedulerSimulator.ShortestRemainingTimeFirst">
+    <Position X="7.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>ShortestRemainingTimeFirst.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Malgun Gothic" Size="9" />
+</ClassDiagram>
