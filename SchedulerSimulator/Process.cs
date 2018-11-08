@@ -8,9 +8,24 @@ namespace SchedulerSimulator
 {
     class Process
     {
-        public string ProcessId { get; private set; }
-        public int ArrivedTime { get; private set; }
-        public int BurstTime { get; private set; }
-        public int Priority { get; private set; }
+        /// <summary>
+        /// 프로세스 ID
+        /// </summary>
+        public string ProcessId { get; set; }
+
+        /// <summary>
+        /// 도착 시간
+        /// </summary>
+        public int ArrivedTime { get; set; }
+
+        /// <summary>
+        /// 서비스 시간
+        /// </summary>
+        public int BurstTime { get; set; }
+
+        /// <summary>
+        /// 우선순위
+        /// </summary>
+        public int Priority { get; set; }
     }
 }
