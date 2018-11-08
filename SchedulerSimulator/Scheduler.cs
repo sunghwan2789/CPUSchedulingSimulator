@@ -13,6 +13,7 @@ namespace SchedulerSimulator
         public Action<ProcessControlBlock> Dispatched;
         public Action<ProcessControlBlock> Timeout;
         public Action<ProcessControlBlock> Completed;
+        public Action<ProcessControlBlock> ProcessChanged;
 
         protected abstract void Dispatch();
         public abstract void Push(Process process);
