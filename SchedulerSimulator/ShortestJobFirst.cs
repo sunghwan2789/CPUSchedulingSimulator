@@ -16,8 +16,37 @@ namespace SchedulerSimulator
             {
                 Process = process,
             });
-            Dispatch();
+            if (process.ArrivalTime >= currentTime)
+            {
+                Dispatch();
+            }
         }
-        protected override void Dispatch() => throw new NotImplementedException();
+
+        protected override void Dispatch()
+        {
+            while (readyQueue.Any())
+            {
+                var before = readyQueue.First().Value;
+                readyQueue.RemoveAt(0);
+                var pcb = (ProcessControlBlock)before.Clone();
+                var process = pcb.Process;
+
+                // 프로세스 도착 시간까지 현재 시간을 진행
+                if (currentTime < process.ArrivalTime)
+                {
+                    currentTime = process.ArrivalTime;
+                }
+
+                pcb.ResponseTime = currentTime - process.ArrivalTime;
+                pcb.WaitingTime = currentTime - process.ArrivalTime;
+
+                currentTime += process.BurstTime;
+                pcb.BurstTime = process.BurstTime;
+
+                pcb.TurnaroundTime = currentTime - process.ArrivalTime;
+
+                OnProcessChanged(pcb);
+            }
+        }
     }
 }
