@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="FirstComeFirstServedTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShortestJobFirstTest.cs" />
     <Compile Include="Testdata.cs" />
   </ItemGroup>
   <ItemGroup>
