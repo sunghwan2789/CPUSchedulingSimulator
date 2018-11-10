@@ -32,14 +32,14 @@ namespace SchedulerSimulator
                 {
                     currentTime = process.ArrivalTime;
                 }
-
+                
                 pcb.ResponseTime = currentTime - process.ArrivalTime;
+                pcb.WaitingTime = currentTime - process.ArrivalTime;
 
-                pcb.BurstTime = process.BurstTime;
                 currentTime += process.BurstTime;
+                pcb.BurstTime = process.BurstTime;
 
-                pcb.TurnaroundTime = currentTime - pcb.ResponseTime;
-                pcb.WaitingTime = currentTime - before.TurnaroundTime;
+                pcb.TurnaroundTime = currentTime - process.ArrivalTime;
 
                 ProcessChanged?.Invoke(pcb);
             }
