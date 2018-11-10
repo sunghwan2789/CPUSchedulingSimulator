@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchedulerSimulator
 {
-    class ShortestRemainingTimeFirst : Scheduler
+    public class ShortestRemainingTimeFirst : Scheduler
     {
         private readonly SortedList<int, ProcessControlBlock> readyQueue = new SortedList<int, ProcessControlBlock>();
 

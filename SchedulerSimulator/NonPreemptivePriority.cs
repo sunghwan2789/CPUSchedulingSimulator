@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchedulerSimulator
 {
-    class NonPreemptivePriority : Scheduler
+    public class NonPreemptivePriority : Scheduler
     {
         private readonly SortedList<int, ProcessControlBlock> readyQueue = new SortedList<int, ProcessControlBlock>();
 

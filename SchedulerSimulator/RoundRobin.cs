@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchedulerSimulator
 {
-    class RoundRobin : Scheduler
+    public class RoundRobin : Scheduler
     {
         /// <summary>
         /// 시간 할당량

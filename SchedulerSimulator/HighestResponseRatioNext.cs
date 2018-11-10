@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchedulerSimulator
 {
-    class HighestResponseRatioNext : Scheduler
+    public class HighestResponseRatioNext : Scheduler
     {
         private readonly List<ProcessControlBlock> readyQueue = new List<ProcessControlBlock>();
 
