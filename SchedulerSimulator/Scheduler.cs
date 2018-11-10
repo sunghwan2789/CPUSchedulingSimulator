@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchedulerSimulator
 {
-    abstract class Scheduler
+    public abstract class Scheduler
     {
         protected int currentTime = 0;
 

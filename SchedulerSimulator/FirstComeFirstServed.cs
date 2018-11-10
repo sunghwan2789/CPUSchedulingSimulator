@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchedulerSimulator
 {
-    class FirstComeFirstServed : Scheduler
+    public class FirstComeFirstServed : Scheduler
     {
         private readonly Queue<ProcessControlBlock> readyQueue = new Queue<ProcessControlBlock>();
 
@@ -28,12 +28,12 @@ namespace SchedulerSimulator
                 var process = pcb.Process;
 
                 // 프로세스 도착 시간까지 현재 시간을 진행
-                if (currentTime < process.ArrivedTime)
+                if (currentTime < process.ArrivalTime)
                 {
-                    currentTime = process.ArrivedTime;
+                    currentTime = process.ArrivalTime;
                 }
 
-                pcb.ResponseTime = currentTime - process.ArrivedTime;
+                pcb.ResponseTime = currentTime - process.ArrivalTime;
 
                 pcb.BurstTime = process.BurstTime;
                 currentTime += process.BurstTime;

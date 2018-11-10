@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchedulerSimulator
 {
-    class ProcessControlBlock : ICloneable
+    public class ProcessControlBlock : ICloneable
     {
         /// <summary>
         /// 원본 프로세스
@@ -19,7 +19,8 @@ namespace SchedulerSimulator
         public int WaitingTime { get; set; }
         
         /// <summary>
-        /// 응답 시간, 작업이 처음 실행되기까지 걸린 시간
+        /// 응답 시간, 작업이 처음 실행되기까지 걸린 시간<br />
+        /// 첫 대기 시간
         /// </summary>
         public int ResponseTime { get; set; }
         
