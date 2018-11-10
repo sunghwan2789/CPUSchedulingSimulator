@@ -41,7 +41,7 @@ namespace SchedulerSimulator
 
                 pcb.TurnaroundTime = currentTime - process.ArrivalTime;
 
-                ProcessChanged?.Invoke(pcb);
+                OnProcessChanged(pcb);
             }
         }
     }

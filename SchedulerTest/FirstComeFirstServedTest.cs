@@ -58,19 +58,21 @@ namespace SchedulerTest
                     TurnaroundTime = ((7 + 4) + 1) + 3 - 6,
                 },
             };
-            var seq = 0;
-            s.ProcessChanged = (pcb) =>
-            {
-                var e = expected[seq++];
-                Assert.AreEqual(e.Process.ProcessId, pcb.Process.ProcessId, "프로세스 ID 불일치");
-                Assert.AreEqual(e.ResponseTime, pcb.ResponseTime, $"{e.Process.ProcessId} 응답 시간 불일치");
-                Assert.AreEqual(e.WaitingTime, pcb.WaitingTime, $"{e.Process.ProcessId} 대기 시간 불일치");
-                Assert.AreEqual(e.BurstTime, pcb.BurstTime, $"{e.Process.ProcessId} 서비스 시간 불일치");
-                Assert.AreEqual(e.TurnaroundTime, pcb.TurnaroundTime, $"{e.Process.ProcessId} 반환 시간 불일치");
-            };
             foreach (var p in Testdata.Processes)
             {
                 s.Push(p);
+            }
+            var result = s.GetResult();
+            Assert.AreEqual(expected.Length, result.Count, "프로세스 처리 불충분");
+            for (var i = 0; i < expected.Length; i++)
+            {
+                var e = expected[i];
+                var r = result[i];
+                Assert.AreEqual(e.Process.ProcessId, r.Process.ProcessId, "프로세스 ID 불일치");
+                Assert.AreEqual(e.ResponseTime, r.ResponseTime, $"{e.Process.ProcessId} 응답 시간 불일치");
+                Assert.AreEqual(e.WaitingTime, r.WaitingTime, $"{e.Process.ProcessId} 대기 시간 불일치");
+                Assert.AreEqual(e.BurstTime, r.BurstTime, $"{e.Process.ProcessId} 서비스 시간 불일치");
+                Assert.AreEqual(e.TurnaroundTime, r.TurnaroundTime, $"{e.Process.ProcessId} 반환 시간 불일치");
             }
         }
     }
