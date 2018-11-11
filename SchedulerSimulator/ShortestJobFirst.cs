@@ -14,14 +14,20 @@ namespace SchedulerSimulator
 
         public override void Push(Process process)
         {
+            if (
+                readyQueue.Any()
+                && process.ArrivalTime > readyQueue.First().Value.Process.ArrivalTime
+            )
+            {
+                while (readyQueue.Any() && process.ArrivalTime > currentTime)
+                {
+                    Dispatch();
+                }
+            }
             readyQueue.Add(process.BurstTime, new ProcessControlBlock
             {
                 Process = process,
             });
-            if (process.ArrivalTime >= currentTime)
-            {
-                Dispatch();
-            }
         }
 
         protected override void Dispatch()
