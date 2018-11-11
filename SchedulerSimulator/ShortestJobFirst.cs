@@ -10,6 +10,8 @@ namespace SchedulerSimulator
     {
         private readonly SortedList<int, ProcessControlBlock> readyQueue = new SortedList<int, ProcessControlBlock>();
 
+        protected override bool Busy => readyQueue.Any();
+
         public override void Push(Process process)
         {
             readyQueue.Add(process.BurstTime, new ProcessControlBlock
@@ -24,29 +26,26 @@ namespace SchedulerSimulator
 
         protected override void Dispatch()
         {
-            while (readyQueue.Any())
+            var before = readyQueue.First().Value;
+            readyQueue.RemoveAt(0);
+            var pcb = (ProcessControlBlock)before.Clone();
+            var process = pcb.Process;
+
+            // 프로세스 도착 시간까지 현재 시간을 진행
+            if (currentTime < process.ArrivalTime)
             {
-                var before = readyQueue.First().Value;
-                readyQueue.RemoveAt(0);
-                var pcb = (ProcessControlBlock)before.Clone();
-                var process = pcb.Process;
-
-                // 프로세스 도착 시간까지 현재 시간을 진행
-                if (currentTime < process.ArrivalTime)
-                {
-                    currentTime = process.ArrivalTime;
-                }
-
-                pcb.ResponseTime = currentTime - process.ArrivalTime;
-                pcb.WaitingTime = currentTime - process.ArrivalTime;
-
-                currentTime += process.BurstTime;
-                pcb.BurstTime = process.BurstTime;
-
-                pcb.TurnaroundTime = currentTime - process.ArrivalTime;
-
-                OnProcessChanged(pcb);
+                currentTime = process.ArrivalTime;
             }
+
+            pcb.ResponseTime = currentTime - process.ArrivalTime;
+            pcb.WaitingTime = currentTime - process.ArrivalTime;
+
+            currentTime += process.BurstTime;
+            pcb.BurstTime = process.BurstTime;
+
+            pcb.TurnaroundTime = currentTime - process.ArrivalTime;
+
+            OnProcessChanged(pcb);
         }
     }
 }

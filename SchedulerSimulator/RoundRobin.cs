@@ -15,6 +15,8 @@ namespace SchedulerSimulator
 
         private readonly Queue<ProcessControlBlock> readyQueue = new Queue<ProcessControlBlock>();
 
+        protected override bool Busy => throw new NotImplementedException();
+
         public override void Push(Process process) => throw new NotImplementedException();
         protected override void Dispatch() => throw new NotImplementedException();
     }

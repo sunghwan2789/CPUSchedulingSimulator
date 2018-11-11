@@ -30,12 +30,15 @@ namespace SchedulerSimulator
             result.Add(pcb);
             ProcessChanged?.Invoke(pcb);
         }
-        
+
+        /// <summary>
+        /// 준비 큐에 프로세스가 남았는지 확인한다.
+        /// </summary>
+        protected abstract bool Busy { get; }
+
         /// <summary>
         /// CPU가 프로세스를 처리하도록 준비 큐에서 PCB를 뽑아
         /// 실행 상태로 바꾸고 스케줄링 알고리즘을 시현한다.
-        /// 
-        /// TODO: 한번에 하나의 PCB만 생성하도록 변경하기
         /// </summary>
         protected abstract void Dispatch();
 
@@ -52,7 +55,10 @@ namespace SchedulerSimulator
         public List<ProcessControlBlock> GetResult()
         {
             // 처리 대기 중인 프로세스를 마저 처리
-            Dispatch();
+            while (Busy)
+            {
+                Dispatch();
+            }
             // 시현 결과 반환
             return result;
         }
