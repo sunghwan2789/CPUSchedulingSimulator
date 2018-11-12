@@ -5,12 +5,12 @@ using SchedulerSimulator;
 namespace SchedulerTest
 {
     [TestClass]
-    public class ShortestJobFirstTest
+    public class NonPreemptivePriorityTest
     {
         [TestMethod]
         public void TestMethod1()
         {
-            var s = new ShortestJobFirst();
+            var s = new NonPreemptivePriority();
             var expected = new[]
             {
                 new ProcessControlBlock
@@ -28,23 +28,12 @@ namespace SchedulerTest
                 {
                     Process = new Process
                     {
-                        ProcessId = "P2",
-                    },
-                    ResponseTime = 7 - 3,
-                    WaitingTime = 7 - 3,
-                    BurstTime = 1,
-                    TurnaroundTime = 7 + 1 - 3,
-                },
-                new ProcessControlBlock
-                {
-                    Process = new Process
-                    {
                         ProcessId = "P3",
                     },
-                    ResponseTime = 7 + 1 - 6,
-                    WaitingTime = 7 + 1 - 6,
+                    ResponseTime = 7 - 6,
+                    WaitingTime = 7 - 6,
                     BurstTime = 3,
-                    TurnaroundTime = 7 + 1 + 3 - 6,
+                    TurnaroundTime = 7 + 3 - 6,
                 },
                 new ProcessControlBlock
                 {
@@ -52,10 +41,21 @@ namespace SchedulerTest
                     {
                         ProcessId = "P1",
                     },
-                    ResponseTime = 7 + 1 + 3 - 2,
-                    WaitingTime = 7 + 1 + 3 - 2,
+                    ResponseTime = 7 + 3 - 2,
+                    WaitingTime = 7 + 3 - 2,
                     BurstTime = 4,
-                    TurnaroundTime = 7 + 1 + 3 + 4 - 2,
+                    TurnaroundTime = 7 + 3 + 4 - 2,
+                },
+                new ProcessControlBlock
+                {
+                    Process = new Process
+                    {
+                        ProcessId = "P2",
+                    },
+                    ResponseTime = 7 + 3 + 4 - 3,
+                    WaitingTime = 7 + 3 + 4 - 3,
+                    BurstTime = 1,
+                    TurnaroundTime = 7 + 3 + 4 + 1 - 3,
                 },
             };
             foreach (var p in Testdata.Processes)
