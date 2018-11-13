@@ -12,7 +12,7 @@ namespace SchedulerTest
         // PID, 도착 시간, 실행 시간, 우선순위
         public const string ex01 = @"4
 P0 0 7 3
-P1 0 3 2
+P1 0 3 3
 P2 2 1 4
 P3 4 7 1
 2";

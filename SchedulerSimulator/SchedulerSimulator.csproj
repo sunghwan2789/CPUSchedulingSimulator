@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DuplicateKeyComparer.cs" />
     <Compile Include="FirstComeFirstServed.cs" />
     <Compile Include="HighestResponseRatioNext.cs" />
     <Compile Include="NonPreemptivePriority.cs" />

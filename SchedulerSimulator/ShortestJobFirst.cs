@@ -8,7 +8,7 @@ namespace SchedulerSimulator
 {
     public class ShortestJobFirst : Scheduler
     {
-        private readonly SortedList<int, ProcessControlBlock> readyQueue = new SortedList<int, ProcessControlBlock>();
+        private readonly SortedList<int, ProcessControlBlock> readyQueue = new SortedList<int, ProcessControlBlock>(new DuplicateKeyComparer<int>());
 
         protected override bool Busy => readyQueue.Any();
 
