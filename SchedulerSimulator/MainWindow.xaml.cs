@@ -20,7 +20,9 @@ namespace SchedulerSimulator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string dataFilename { get; set;}
         private Scheduler scheduler;
+        private Data data;
 
         public MainWindow()
         {
@@ -29,17 +31,98 @@ namespace SchedulerSimulator
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            // Create OpenFileDialog 
+            var dlg = new Microsoft.Win32.OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".txt";
+            
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            var result = dlg.ShowDialog();
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                dataFilename = dlg.FileName;
+                textBox3.Text = dataFilename;
+                var dp = new DataParser(dataFilename);
+                data = dp.Parse();
+            }
 
         }
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var tab = (TabItem)tabControl.SelectedItem;
+            switch (tab.Name)
+            {
+                case "fcfs":
+                    scheduler = new FirstComeFirstServed();
+                    break;
+                case "sjf":
+                    scheduler = new ShortestJobFirst();
+                    break;
+                case "srt":
+                    scheduler = new ShortestRemainingTimeFirst();
+                    break;
+                case "npp":
+                    scheduler = new NonPreemptivePriority();
+                    break;
+                case "pp":
+                    scheduler = new PreemptivePriority();
+                    break;
+                case "hrn":
+                    scheduler = new HighestResponseRatioNext();
+                    break;
+                case "rr":
+                    scheduler = new RoundRobin
+                    {
+                        TimeQuantum = data.TimeQuantum,
+                    };
+                    break;
+            }
+            if (data == null)
+            {
+                return;
+            }
 
+            foreach (var p in data.Processes)
+            {
+                scheduler.Push(p);
+            }
+            listView.ItemsSource = scheduler.GetResult();
         }
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+
+        private void textBox3_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ListViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
+        {
+        
+        }
+    }
+    public class Processor
+    {
+        public string Process { get; set; }
+
+        public int Turnaround_time { get; set; }
+
+        public string Latency_time { get; set; }
+
+        public string Response_time { get; set; }
     }
 }
