@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConcurrentProcess.cs" />
+    <Compile Include="DataParserTest.cs" />
     <Compile Include="FirstComeFirstServedTest.cs" />
     <Compile Include="NonPreemptivePriorityTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
