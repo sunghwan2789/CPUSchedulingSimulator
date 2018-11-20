@@ -33,7 +33,7 @@ namespace SchedulerSimulator
         {
             foreach (var rpcb in readyQueue)
             {
-                rpcb.Process.Priority = (double)currentTime / rpcb.Process.BurstTime;
+                rpcb.Process.Priority = (double)(currentTime - rpcb.Process.ArrivalTime) / rpcb.Process.BurstTime;
             }
             readyQueue.Sort(new PriorityCompare());
 
