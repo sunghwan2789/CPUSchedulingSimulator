@@ -26,7 +26,7 @@ namespace SchedulerSimulator
         /// <summary>
         /// 우선순위
         /// </summary>
-        public int Priority { get; set; }
+        public double Priority { get; set; }
 
         /// <summary>
         /// 데이터 줄에서 프로세스 정보를 읽는다.
@@ -41,7 +41,7 @@ namespace SchedulerSimulator
                 ProcessId = data[0],
                 ArrivalTime = int.Parse(data[1]),
                 BurstTime = int.Parse(data[2]),
-                Priority = int.Parse(data[3]),
+                Priority = double.Parse(data[3]),
             };
         }
     }
