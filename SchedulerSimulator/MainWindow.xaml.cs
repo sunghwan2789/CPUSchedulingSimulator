@@ -49,6 +49,8 @@ namespace SchedulerSimulator
                 textBox3.Text = dataFilename;
                 var dp = new DataParser(dataFilename);
                 data = dp.Parse();
+
+                tabControl_SelectionChanged(null, null);
             }
 
         }
@@ -91,6 +93,18 @@ namespace SchedulerSimulator
             foreach (var p in data.Processes)
             {
                 scheduler.Push(p);
+            }
+            var rand = new Random();
+            foreach( var p in scheduler.GetResult())
+            {
+                var rect = new Rectangle
+                {
+                    Width = p.BurstTime * 10,
+                    Height = canvaaas.Height,
+                    Fill = new SolidColorBrush(Color.FromRgb((byte)rand.Next(0, 255), (byte)rand.Next(0, 255), (byte)rand.Next(0, 255))),
+                };
+                canvaaas.Children.Add(rect);
+                Canvas.SetLeft(rect, (p.Process.ArrivalTime + p.ResponseTime) * 10);
             }
             listView.ItemsSource = scheduler.GetResult();
         }
