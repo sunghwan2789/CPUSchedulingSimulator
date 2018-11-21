@@ -11,54 +11,47 @@ namespace SchedulerTest
         public void TestMethod1()
         {
             var s = new ShortestJobFirst();
+            var processes = Testdata.Processes;
             var expected = new[]
             {
                 new ProcessControlBlock
                 {
-                    Process = new Process
-                    {
-                        ProcessId = "P0",
-                    },
-                    ResponseTime = 0,
-                    WaitingTime = 0,
+                    Process = processes[0],
+                    DispatchTime = 0,
                     BurstTime = 7,
-                    TurnaroundTime = 7 - 0,
+                    RemainingBurstTime = 0,
+                    ResponseTime = 0 - 0,
+                    WaitingTime = 0 - 0,
                 },
                 new ProcessControlBlock
                 {
-                    Process = new Process
-                    {
-                        ProcessId = "P2",
-                    },
-                    ResponseTime = 7 - 3,
-                    WaitingTime = 7 - 3,
+                    Process = processes[2],
+                    DispatchTime = 0 + 7,
                     BurstTime = 1,
-                    TurnaroundTime = 7 + 1 - 3,
+                    RemainingBurstTime = 0,
+                    ResponseTime = 0 + 7 - 3,
+                    WaitingTime = 0 + 7 - 3,
                 },
                 new ProcessControlBlock
                 {
-                    Process = new Process
-                    {
-                        ProcessId = "P3",
-                    },
-                    ResponseTime = 7 + 1 - 6,
-                    WaitingTime = 7 + 1 - 6,
+                    Process = processes[3],
+                    DispatchTime = 0 + 7 + 1,
                     BurstTime = 3,
-                    TurnaroundTime = 7 + 1 + 3 - 6,
+                    RemainingBurstTime = 0,
+                    ResponseTime = 0 + 7 + 1 - 6,
+                    WaitingTime = 0 + 7 + 1 - 6,
                 },
                 new ProcessControlBlock
                 {
-                    Process = new Process
-                    {
-                        ProcessId = "P1",
-                    },
-                    ResponseTime = 7 + 1 + 3 - 2,
-                    WaitingTime = 7 + 1 + 3 - 2,
+                    Process = processes[1],
+                    DispatchTime = 0 + 7 + 1 + 3,
                     BurstTime = 4,
-                    TurnaroundTime = 7 + 1 + 3 + 4 - 2,
+                    RemainingBurstTime = 0,
+                    ResponseTime = 0 + 7 + 1 + 3 - 2,
+                    WaitingTime = 0 + 7 + 1 + 3 - 2,
                 },
             };
-            foreach (var p in Testdata.Processes)
+            foreach (var p in processes)
             {
                 s.Push(p);
             }
@@ -80,54 +73,47 @@ namespace SchedulerTest
         public void TestConcurrentProcess()
         {
             var s = new ShortestJobFirst();
+            var processes = ConcurrentProcess.Processes;
             var expected = new[]
             {
                 new ProcessControlBlock
                 {
-                    Process = new Process
-                    {
-                        ProcessId = "P1",
-                    },
+                    Process = processes[1],
+                    DispatchTime = 0,
+                    BurstTime = 3,
+                    RemainingBurstTime = 0,
                     ResponseTime = 0 - 0,
                     WaitingTime = 0 - 0,
-                    BurstTime = 3,
-                    TurnaroundTime = 0 + 3 - 0,
                 },
                 new ProcessControlBlock
                 {
-                    Process = new Process
-                    {
-                        ProcessId = "P2",
-                    },
-                    ResponseTime = (0 + 3) - 2,
-                    WaitingTime = (0 + 3) - 2,
+                    Process = processes[2],
+                    DispatchTime = 0 + 3,
                     BurstTime = 1,
-                    TurnaroundTime = (0 + 3) + 1 - 2,
+                    RemainingBurstTime = 0,
+                    ResponseTime = 0 + 3 - 2,
+                    WaitingTime = 0 + 3 - 2,
                 },
                 new ProcessControlBlock
                 {
-                    Process = new Process
-                    {
-                        ProcessId = "P0",
-                    },
-                    ResponseTime = ((0 + 3) + 1) - 0,
-                    WaitingTime = ((0 + 3) + 1) - 0,
+                    Process = processes[0],
+                    DispatchTime = 0 + 3 + 1,
                     BurstTime = 7,
-                    TurnaroundTime = ((0 + 3) + 1) + 7 - 0,
+                    RemainingBurstTime = 0,
+                    ResponseTime = 0 + 3 + 1 - 0,
+                    WaitingTime = 0 + 3 + 1 - 0,
                 },
                 new ProcessControlBlock
                 {
-                    Process = new Process
-                    {
-                        ProcessId = "P3",
-                    },
-                    ResponseTime = (((0 + 3) + 1) + 7) - 4,
-                    WaitingTime = (((0 + 3) + 1) + 7) - 4,
+                    Process = processes[3],
+                    DispatchTime = 0 + 3 + 1 + 7,
                     BurstTime = 7,
-                    TurnaroundTime = (((0 + 3) + 1) + 7) + 7 - 4,
+                    RemainingBurstTime = 0,
+                    ResponseTime = 0 + 3 + 1 + 7 - 4,
+                    WaitingTime = 0 + 3 + 1 + 7 - 4,
                 },
             };
-            foreach (var p in ConcurrentProcess.Processes)
+            foreach (var p in processes)
             {
                 s.Push(p);
             }

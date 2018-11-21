@@ -36,10 +36,9 @@ namespace SchedulerSimulator
             pcb.ResponseTime = currentTime - process.ArrivalTime;
             pcb.WaitingTime = currentTime - process.ArrivalTime;
 
-            currentTime += process.BurstTime;
+            pcb.DispatchTime = currentTime;
             pcb.BurstTime = process.BurstTime;
-
-            pcb.TurnaroundTime = currentTime - process.ArrivalTime;
+            currentTime += pcb.BurstTime;
 
             OnProcessChanged(pcb);
         }

@@ -22,14 +22,13 @@ P3 6 3 1
 
         static Testdata()
         {
-            var lines = ex01.Split('\n');
-            var count = int.Parse(lines[0]);
-            Processes = new Process[count];
-            for (var i = 0; i < count; i++)
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(ex01)))
             {
-                Processes[i] = Process.Parse(lines[i + 1]);
+                var dp = new DataParser(ms);
+                var data = dp.Parse();
+                Processes = data.Processes;
+                TimeQuantum = data.TimeQuantum;
             }
-            TimeQuantum = int.Parse(lines[count + 1]);
         }
     }
 }
