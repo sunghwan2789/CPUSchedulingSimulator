@@ -14,16 +14,7 @@ namespace SchedulerSimulator
 
         public override void Push(Process process)
         {
-            if (
-               readyQueue.Any()
-               && process.ArrivalTime > readyQueue.First().Process.ArrivalTime
-             )
-            {
-                while (readyQueue.Any() && process.ArrivalTime > currentTime)
-                {
-                    Dispatch();
-                }
-            }
+            base.Push(process);
             readyQueue.Add(new ProcessControlBlock
             {
                 Process = process,

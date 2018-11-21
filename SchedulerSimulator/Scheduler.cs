@@ -9,6 +9,7 @@ namespace SchedulerSimulator
     public abstract class Scheduler
     {
         protected int currentTime = 0;
+        protected int lastArrivalTime = 0;
         protected readonly List<ProcessControlBlock> result = new List<ProcessControlBlock>();
 
         public Action<ProcessControlBlock> Dispatched;
@@ -46,7 +47,19 @@ namespace SchedulerSimulator
         /// 준비 큐에 CPU가 처리할 프로세스를 추가한다.
         /// </summary>
         /// <param name="process"></param>
-        public abstract void Push(Process process);
+        public virtual void Push(Process process)
+        {
+            // 이전에 동시에 도착한 프로세스를 먼저 실행
+            if (lastArrivalTime < process.ArrivalTime)
+            {
+                while (Busy && currentTime < process.ArrivalTime)
+                {
+                    Dispatch();
+                }
+            }
+            // 마지막 도착 시간을 설정하여 동시 도착 작업 처리
+            lastArrivalTime = process.ArrivalTime;
+        }
 
         /// <summary>
         /// 스케줄링 알고리즘 시현 결과를 반환한다.

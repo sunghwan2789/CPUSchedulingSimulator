@@ -14,11 +14,11 @@ namespace SchedulerSimulator
 
         public override void Push(Process process)
         {
+            base.Push(process);
             readyQueue.Enqueue(new ProcessControlBlock
             {
                 Process = process,
             });
-            Dispatch();
         }
 
         protected override void Dispatch()
