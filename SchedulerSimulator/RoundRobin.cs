@@ -47,26 +47,34 @@ namespace SchedulerSimulator
                 currentTime = process.ArrivalTime;
             }
 
-            if (pcb.ResponseTime == null)
+            if (before.Initial)
             {
                 pcb.ResponseTime = currentTime - process.ArrivalTime;
-            }
-            if (pcb.WaitingTime == null)
-            {
                 pcb.WaitingTime = currentTime - process.ArrivalTime;
             }
             else
             {
-                // TODO
-                pcb.WaitingTime = before.WaitingTime;
+                pcb.WaitingTime = currentTime - before.EndTime;
             }
 
-            currentTime += process.BurstTime;
-            pcb.BurstTime = process.BurstTime;
-
-            pcb.TurnaroundTime = currentTime - process.ArrivalTime;
+            pcb.DispatchTime = currentTime;
+            if (pcb.RemainingBurstTime > TimeQuantum)
+            {
+                pcb.BurstTime = TimeQuantum;
+            }
+            else
+            {
+                pcb.BurstTime = pcb.RemainingBurstTime;
+            }
+            currentTime += pcb.BurstTime;
+            pcb.RemainingBurstTime -= pcb.BurstTime;
 
             OnProcessChanged(pcb);
+
+            if (pcb.RemainingBurstTime > 0)
+            {
+                readyQueue.Enqueue(pcb);
+            }
         }
     }
 }
