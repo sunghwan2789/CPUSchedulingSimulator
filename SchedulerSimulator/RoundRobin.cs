@@ -53,24 +53,17 @@ namespace SchedulerSimulator
             }
             else
             {
-                pcb.WaitingTime = currentTime - before.EndTime;
+                pcb.WaitingTime += currentTime - before.EndTime;
             }
 
             pcb.DispatchTime = currentTime;
-            if (pcb.RemainingBurstTime > TimeQuantum)
-            {
-                pcb.BurstTime = TimeQuantum;
-            }
-            else
-            {
-                pcb.BurstTime = pcb.RemainingBurstTime;
-            }
+
+            pcb.BurstTime = Math.Min(TimeQuantum, pcb.RemainingBurstTime);
             currentTime += pcb.BurstTime;
             pcb.RemainingBurstTime -= pcb.BurstTime;
 
             OnProcessChanged(pcb);
 
-            // 여기 수정
             if (pcb.RemainingBurstTime > 0)
             {
                 lastDispatch = pcb;
