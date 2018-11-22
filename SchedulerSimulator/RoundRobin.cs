@@ -23,6 +23,7 @@ namespace SchedulerSimulator
             readyQueue.Enqueue(new ProcessControlBlock
             {
                 Process = process,
+                RemainingBurstTime = process.BurstTime,
             });
         }
 
@@ -62,6 +63,7 @@ namespace SchedulerSimulator
 
             OnProcessChanged(pcb);
 
+            // 여기 수정
             if (pcb.RemainingBurstTime > 0)
             {
                 readyQueue.Enqueue(pcb);
