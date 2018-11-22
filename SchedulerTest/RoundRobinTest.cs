@@ -34,21 +34,21 @@ namespace SchedulerTest
                 },
                 new ProcessControlBlock
                 {
-                    Process = processes[2],
-                    DispatchTime = 4,
-                    BurstTime = 1,
-                    RemainingBurstTime = 0,
-                    ResponseTime = 4 - 3,
-                    WaitingTime = 4 - 3,
-                },
-                new ProcessControlBlock
-                {
                     Process = processes[0],
-                    DispatchTime = 5,
+                    DispatchTime = 4,
                     BurstTime = 2,
                     RemainingBurstTime = 3,
                     ResponseTime = 0 - 0,
-                    WaitingTime = 0 - 0 + 5 - 2,
+                    WaitingTime = 0 - 0 + 4 - 2,
+                },
+                new ProcessControlBlock
+                {
+                    Process = processes[2],
+                    DispatchTime = 6,
+                    BurstTime = 1,
+                    RemainingBurstTime = 0,
+                    ResponseTime = 6 - 3,
+                    WaitingTime = 6 - 3,
                 },
                 new ProcessControlBlock
                 {
