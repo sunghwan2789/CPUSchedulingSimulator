@@ -14,8 +14,9 @@ namespace SchedulerSimulator
         public int TimeQuantum { get; set; }
 
         private readonly Queue<ProcessControlBlock> readyQueue = new Queue<ProcessControlBlock>();
+        private ProcessControlBlock lastDispatch = null;
 
-        protected override bool Busy => readyQueue.Any();
+        protected override bool Busy => readyQueue.Any() || lastDispatch != null;
 
         public override void Push(Process process)
         {
@@ -29,6 +30,12 @@ namespace SchedulerSimulator
 
         protected override void Dispatch()
         {
+            if (lastDispatch != null)
+            {
+                readyQueue.Enqueue(lastDispatch);
+                lastDispatch = null;
+            }
+
             var before = readyQueue.Dequeue();
             var pcb = (ProcessControlBlock)before.Clone();
             var process = pcb.Process;
@@ -66,7 +73,7 @@ namespace SchedulerSimulator
             // 여기 수정
             if (pcb.RemainingBurstTime > 0)
             {
-                readyQueue.Enqueue(pcb);
+                lastDispatch = pcb;
             }
         }
     }
