@@ -48,7 +48,7 @@
                     <TextBox x:Name="txtTimeQuantum" />
                 </StackPanel>
             </Grid>
-            <Button x:Name="btnApply" Content="적용" />
+            <Button x:Name="btnApply" Content="적용" Click="BtnApply_Click" />
 
             <TextBlock x:Name="textBlock1" Text="알고리즘"/>
             <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged">

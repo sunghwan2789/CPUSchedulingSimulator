@@ -21,8 +21,8 @@ namespace SchedulerSimulator
     public partial class MainWindow : Window
     {
         private string dataFilename { get; set;}
-        private Scheduler scheduler;
-        private Data data;
+        private Scheduler scheduler = new FirstComeFirstServed();
+        private Data data = new Data { Processes = new Process[0], };
 
         public MainWindow()
         {
@@ -52,12 +52,12 @@ namespace SchedulerSimulator
                 editor.ItemsSource = data.Processes;
                 txtTimeQuantum.Text = data.TimeQuantum.ToString();
 
-                tabControl_SelectionChanged(null, null);
+                RunSimulator();
             }
 
         }
 
-        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void RunSimulator()
         {
             var tab = (TabItem)tabControl.SelectedItem;
             switch (tab.Name)
@@ -87,10 +87,6 @@ namespace SchedulerSimulator
                     };
                     break;
             }
-            if (data == null)
-            {
-                return;
-            }
 
             foreach (var p in data.Processes)
             {
@@ -102,6 +98,18 @@ namespace SchedulerSimulator
             lblAverage.Text = $@"평균 대기 시간: {scheduler.GetAverageWaitingTime()}
 평균 반환 시간: {scheduler.GetAverageTurnaroundTime()}
 평균 응답 시간: {scheduler.GetAverageResponseTime()}";
+        }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RunSimulator();
+        }
+
+        private void BtnApply_Click(object sender, RoutedEventArgs e)
+        {
+            data.Processes = (Process[])editor.ItemsSource;
+            data.TimeQuantum = int.Parse(txtTimeQuantum.Text);
+            RunSimulator();
         }
     }
 }
