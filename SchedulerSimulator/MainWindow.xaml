@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:SchedulerSimulator"
         mc:Ignorable="d"
 
-        Title="7가지 알고리즘 프로세스 시뮬레이터" Height="734" Width="717.4">
+        Title="7가지 알고리즘 프로세스 시뮬레이터" Height="432" Width="717.4">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" >
     <StackPanel Margin="10">
         <TextBlock x:Name="textBlock" Text="스케줄링 파일" />
         <Grid>
@@ -44,4 +45,5 @@
         </ListView>
         <TextBlock x:Name="lblAverage" />
     </StackPanel>
+    </ScrollViewer>
 </Window>
