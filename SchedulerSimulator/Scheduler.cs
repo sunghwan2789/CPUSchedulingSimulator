@@ -75,5 +75,28 @@ namespace SchedulerSimulator
             // 시현 결과 반환
             return result;
         }
+
+        public IEnumerable<ProcessControlBlock> GetFinalResult() =>
+            GetResult()
+            .GroupBy(i => i.Process)
+            .Select(i => new ProcessControlBlock
+            {
+                Process = i.Key,
+                DispatchTime = i.First().DispatchTime,
+                BurstTime = i.Sum(j => j.BurstTime),
+                RemainingBurstTime = i.Last().RemainingBurstTime,
+                ResponseTime = i.First().ResponseTime,
+                WaitingTime = i.Last().WaitingTime,
+                TurnaroundTime = i.Last().TurnaroundTime,
+            })
+            .OrderBy(i => i.Process.ArrivalTime);
+
+        public int GetTotalResponseTime() => GetFinalResult().Sum(i => i.ResponseTime);
+        public int GetTotalWaitingTime() => GetFinalResult().Sum(i => i.WaitingTime);
+        public int GetTotalTurnaroundTime() => GetFinalResult().Sum(i => i.TurnaroundTime);
+
+        public double GetAverageResponseTime() => (double)GetTotalResponseTime() / GetFinalResult().Count();
+        public double GetAverageWaitingTime() => (double)GetTotalWaitingTime() / GetFinalResult().Count();
+        public double GetAverageTurnaroundTime() => (double)GetTotalTurnaroundTime() / GetFinalResult().Count();
     }
 }
