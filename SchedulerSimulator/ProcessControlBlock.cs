@@ -51,7 +51,15 @@ namespace SchedulerSimulator
         /// <summary>
         /// 반환 시간, 작업 종료 시각에서 도착 시간을 뺀 시간
         /// </summary>
-        public int TurnaroundTime => EndTime - Process.ArrivalTime;
+        public int TurnaroundTime
+        {
+            get => turnaroundTime != null
+                ? turnaroundTime.Value
+                : EndTime - Process.ArrivalTime;
+            set => turnaroundTime = value;
+        }
+
+        private int? turnaroundTime = null;
 
         public object Clone() => new ProcessControlBlock
         {
