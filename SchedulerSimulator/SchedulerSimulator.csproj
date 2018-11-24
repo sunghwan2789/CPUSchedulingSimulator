@@ -59,6 +59,9 @@
     <Compile Include="DataParser.cs" />
     <Compile Include="DuplicateKeyComparer.cs" />
     <Compile Include="FirstComeFirstServed.cs" />
+    <Compile Include="GanttChart.xaml.cs">
+      <DependentUpon>GanttChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HighestResponseRatioNext.cs" />
     <Compile Include="NonPreemptivePriority.cs" />
     <Compile Include="PreemptivePriority.cs" />
@@ -68,6 +71,10 @@
     <Compile Include="Scheduler.cs" />
     <Compile Include="ShortestJobFirst.cs" />
     <Compile Include="ShortestRemainingTimeFirst.cs" />
+    <Page Include="GanttChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

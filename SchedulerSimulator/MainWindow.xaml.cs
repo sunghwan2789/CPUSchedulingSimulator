@@ -90,53 +90,16 @@ namespace SchedulerSimulator
                 return;
             }
 
+            var colors = new Dictionary<Process, Color>();
+            var rand = new Random();
             foreach (var p in data.Processes)
             {
+                p.Color = Color.FromRgb((byte)rand.Next(0, 255), (byte)rand.Next(0, 255), (byte)rand.Next(0, 255));
                 scheduler.Push(p);
             }
-            var rand = new Random();
-            foreach( var p in scheduler.GetResult())
-            {
-                var rect = new Rectangle
-                {
-                    Width = p.BurstTime * 10,
-                    Height = canvaaas.Height,
-                    Fill = new SolidColorBrush(Color.FromRgb((byte)rand.Next(0, 255), (byte)rand.Next(0, 255), (byte)rand.Next(0, 255))),
-                };
-                canvaaas.Children.Add(rect);
-                Canvas.SetLeft(rect, (p.Process.ArrivalTime + p.ResponseTime) * 10);
-            }
-            listView.ItemsSource = scheduler.GetResult();
+
+            canvaaas.DataContext = scheduler.GetResult();
+            listView.ItemsSource = scheduler.GetFinalResult();
         }
-
-        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void ListViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
-        {
-        
-        }
-    }
-    public class Processor
-    {
-        public string Process { get; set; }
-
-        public int Turnaround_time { get; set; }
-
-        public string Latency_time { get; set; }
-
-        public string Response_time { get; set; }
     }
 }

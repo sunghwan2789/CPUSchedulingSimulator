@@ -6,84 +6,41 @@
         xmlns:local="clr-namespace:SchedulerSimulator"
         mc:Ignorable="d"
 
-        Title="7가지 알고리즘 프로세스 시뮬레이터" Height="734" Width="818.4">
-    <Grid Margin="0,0,-6,-106.2">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="282.4"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="16*"/>
-            <ColumnDefinition Width="108*"/>
-            <ColumnDefinition Width="677*"/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="button" Content="찾아보기..." HorizontalAlignment="Left" Height="25" Margin="561,47,0,0" VerticalAlignment="Top" Width="105" Click="button_Click" Grid.Column="2"/>
-        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="25" Margin="0,47,0,0" TextWrapping="Wrap" 
-                 Text="{Binding dataFilename, UpdateSourceTrigger=PropertyChanged}"
-                 VerticalAlignment="Top" Width="656" Grid.ColumnSpan="2" Grid.Column="1" TextChanged="textBox3_TextChanged"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="0,20,0,0" TextWrapping="Wrap" Text="스케줄링 파일" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="16" Width="83" Grid.Column="1">
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.291"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="0,85,0,0" TextWrapping="Wrap" Text="알고리즘" VerticalAlignment="Top" Height="16" Width="48" Grid.Column="1"/>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="575" Margin="10,106,0,0" VerticalAlignment="Top" Width="782" Grid.ColumnSpan="3" SelectionChanged="tabControl_SelectionChanged" Grid.RowSpan="3">
-            <TabItem Header="FCFS" Width="120" x:Name="fcfs"/>
-            <TabItem Header="SJF" Width="95" x:Name="sjf"/>
-            <TabItem Header="SRT" Width="95" x:Name="srt"/>
-            <TabItem Header="비선점 Priority" Width="170" x:Name="npp"/>
-            <TabItem Header="선점 Priority" Width="150" x:Name="pp"/>
-            <TabItem Header="HRN" Width="85" x:Name="hrn"/>
-            <TabItem Header="RR" Width="61" x:Name="rr"/>
-
-
-        </TabControl>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Height="16" Margin="24,141,0,0" TextWrapping="Wrap" Text="간트 차트" VerticalAlignment="Top" Width="56" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.031"/>
-                    <RotateTransform Angle="-0.851"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="23" Margin="22,168,0,0" Stroke="Black" VerticalAlignment="Top" Width="722" Grid.ColumnSpan="2" Grid.Column="1"/>
-        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="22,205,0,0" TextWrapping="Wrap" Text="프로세스별 시간 정보" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="16" Width="130" Grid.Column="1"/>
-        <Grid Margin="22,316.6,484.8,-209.6" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="137*"/>
-                <RowDefinition Height="34*"/>
-            </Grid.RowDefinitions>
+        Title="7가지 알고리즘 프로세스 시뮬레이터" Height="734" Width="717.4">
+    <StackPanel Margin="10">
+        <TextBlock x:Name="textBlock" Text="스케줄링 파일" />
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="0"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="38*"/>
-                <ColumnDefinition Width="114*"/>
-                <ColumnDefinition Width="6*"/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="19*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="105"/>
             </Grid.ColumnDefinitions>
-            <ListView x:Name="listView" HorizontalAlignment="Left" Width="722" SelectionChanged="listView_SelectionChanged" FontSize="18" Margin="1,-364,-428.6,280.6" Grid.ColumnSpan="9">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="프로세스" Width="120" DisplayMemberBinding="{Binding Process.ProcessId}"/>
-                        <GridViewColumn Header="반환시간" Width="120" DisplayMemberBinding="{Binding TurnaroundTime}" />
-                        <GridViewColumn Header="대기시간" Width="120" DisplayMemberBinding="{Binding WaitingTime }" />
-                        <GridViewColumn Header="응답시간" Width="120" DisplayMemberBinding="{Binding ResponseTime}" />
-
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <TextBox x:Name="textBox3" Grid.Column="0"/>
+            <Button x:Name="button" Content="찾아보기..." Grid.Column="2" Click="button_Click"/>
         </Grid>
-        <Canvas x:Name="canvaaas" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="577" Margin="22,168,0,0" Grid.ColumnSpan="2" Grid.Column="1" RenderTransformOrigin="0.502,0.252"/>
-    </Grid>
+
+        <TextBlock x:Name="textBlock1" Text="알고리즘"/>
+        <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
+            <TabItem Header="FCFS" Padding="30,0" x:Name="fcfs"/>
+            <TabItem Header="SJF" Padding="30,0" x:Name="sjf"/>
+            <TabItem Header="SRT" Padding="30,0" x:Name="srt"/>
+            <TabItem Header="비선점 Priority" Padding="30,0" x:Name="npp"/>
+            <TabItem Header="선점 Priority" Padding="30,0" x:Name="pp"/>
+            <TabItem Header="HRN" Padding="30,0" x:Name="hrn"/>
+            <TabItem Header="RR" Padding="30,0" x:Name="rr"/>
+        </TabControl>
+        <TextBlock x:Name="textBlock2"  Text="간트 차트"/>
+        <local:GanttChart x:Name="canvaaas" Height="23" Background="#f5f5f5" />
+        <TextBlock x:Name="textBlock3"  Text="프로세스별 시간 정보"/>
+        <ListView x:Name="listView">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="프로세스" Width="120" DisplayMemberBinding="{Binding Process.ProcessId}"/>
+                    <GridViewColumn Header="반환시간" Width="120" DisplayMemberBinding="{Binding TurnaroundTime}" />
+                    <GridViewColumn Header="대기시간" Width="120" DisplayMemberBinding="{Binding WaitingTime }" />
+                    <GridViewColumn Header="응답시간" Width="120" DisplayMemberBinding="{Binding ResponseTime}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </StackPanel>
 </Window>

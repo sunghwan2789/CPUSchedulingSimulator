@@ -29,6 +29,11 @@ namespace SchedulerSimulator
         public double Priority { get; set; }
 
         /// <summary>
+        /// 프로세스 표시 색상
+        /// </summary>
+        public System.Windows.Media.Color Color { get; set; }
+
+        /// <summary>
         /// 데이터 줄에서 프로세스 정보를 읽는다.
         /// </summary>
         /// <param name="line"></param>
