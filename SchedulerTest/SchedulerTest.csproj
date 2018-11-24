@@ -58,6 +58,7 @@
     <Compile Include="ShortestJobFirstTest.cs" />
     <Compile Include="Testdata.cs" />
     <Compile Include="RoundRobinTest.cs" />
+    <Compile Include="PreemptivePriorityTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
