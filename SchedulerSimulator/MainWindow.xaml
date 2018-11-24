@@ -8,42 +8,42 @@
 
         Title="7가지 알고리즘 프로세스 시뮬레이터" Height="432" Width="717.4">
     <ScrollViewer VerticalScrollBarVisibility="Auto" >
-    <StackPanel Margin="10">
-        <TextBlock x:Name="textBlock" Text="스케줄링 파일" />
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="105"/>
-            </Grid.ColumnDefinitions>
-            <TextBox x:Name="textBox3" Grid.Column="0"/>
-            <Button x:Name="button" Content="찾아보기..." Grid.Column="2" Click="button_Click"/>
-        </Grid>
+        <StackPanel Margin="10">
+            <TextBlock x:Name="textBlock" Text="스케줄링 파일" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="105"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="textBox3" Grid.Column="0"/>
+                <Button x:Name="button" Content="찾아보기..." Grid.Column="2" Click="button_Click"/>
+            </Grid>
 
-        <TextBlock x:Name="textBlock1" Text="알고리즘"/>
-        <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
-            <TabItem Header="FCFS" Padding="30,0" x:Name="fcfs"/>
-            <TabItem Header="SJF" Padding="30,0" x:Name="sjf"/>
-            <TabItem Header="SRT" Padding="30,0" x:Name="srt"/>
-            <TabItem Header="비선점 Priority" Padding="30,0" x:Name="npp"/>
-            <TabItem Header="선점 Priority" Padding="30,0" x:Name="pp"/>
-            <TabItem Header="HRN" Padding="30,0" x:Name="hrn"/>
-            <TabItem Header="RR" Padding="30,0" x:Name="rr"/>
-        </TabControl>
-        <TextBlock x:Name="textBlock2"  Text="간트 차트"/>
-        <local:GanttChart x:Name="canvaaas" Height="23" Background="#f5f5f5" />
-        <TextBlock x:Name="textBlock3"  Text="프로세스별 시간 정보"/>
-        <ListView x:Name="listView">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="프로세스" Width="120" DisplayMemberBinding="{Binding Process.ProcessId}"/>
-                    <GridViewColumn Header="대기시간" Width="120" DisplayMemberBinding="{Binding WaitingTime }" />
-                    <GridViewColumn Header="반환시간" Width="120" DisplayMemberBinding="{Binding TurnaroundTime}" />
-                    <GridViewColumn Header="응답시간" Width="120" DisplayMemberBinding="{Binding ResponseTime}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TextBlock x:Name="lblAverage" />
-    </StackPanel>
+            <TextBlock x:Name="textBlock1" Text="알고리즘"/>
+            <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
+                <TabItem Header="FCFS" Padding="30,0" x:Name="fcfs"/>
+                <TabItem Header="SJF" Padding="30,0" x:Name="sjf"/>
+                <TabItem Header="SRT" Padding="30,0" x:Name="srt"/>
+                <TabItem Header="비선점 Priority" Padding="30,0" x:Name="npp"/>
+                <TabItem Header="선점 Priority" Padding="30,0" x:Name="pp"/>
+                <TabItem Header="HRN" Padding="30,0" x:Name="hrn"/>
+                <TabItem Header="RR" Padding="30,0" x:Name="rr"/>
+            </TabControl>
+            <TextBlock x:Name="textBlock2"  Text="간트 차트"/>
+            <local:GanttChart x:Name="canvaaas" Height="23" Background="#f5f5f5" />
+            <TextBlock x:Name="textBlock3"  Text="프로세스별 시간 정보"/>
+            <ListView x:Name="listView">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="프로세스" Width="120" DisplayMemberBinding="{Binding Process.ProcessId}"/>
+                        <GridViewColumn Header="대기시간" Width="120" DisplayMemberBinding="{Binding WaitingTime }" />
+                        <GridViewColumn Header="반환시간" Width="120" DisplayMemberBinding="{Binding TurnaroundTime}" />
+                        <GridViewColumn Header="응답시간" Width="120" DisplayMemberBinding="{Binding ResponseTime}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <TextBlock x:Name="lblAverage" />
+        </StackPanel>
     </ScrollViewer>
 </Window>
