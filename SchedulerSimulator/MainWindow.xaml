@@ -36,11 +36,12 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="프로세스" Width="120" DisplayMemberBinding="{Binding Process.ProcessId}"/>
-                    <GridViewColumn Header="반환시간" Width="120" DisplayMemberBinding="{Binding TurnaroundTime}" />
                     <GridViewColumn Header="대기시간" Width="120" DisplayMemberBinding="{Binding WaitingTime }" />
+                    <GridViewColumn Header="반환시간" Width="120" DisplayMemberBinding="{Binding TurnaroundTime}" />
                     <GridViewColumn Header="응답시간" Width="120" DisplayMemberBinding="{Binding ResponseTime}" />
                 </GridView>
             </ListView.View>
         </ListView>
+        <TextBlock x:Name="lblAverage" />
     </StackPanel>
 </Window>

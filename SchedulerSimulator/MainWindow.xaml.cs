@@ -100,6 +100,9 @@ namespace SchedulerSimulator
 
             canvaaas.DataContext = scheduler.GetResult();
             listView.ItemsSource = scheduler.GetFinalResult();
+            lblAverage.Text = $@"평균 대기 시간: {scheduler.GetAverageWaitingTime()}
+평균 반환 시간: {scheduler.GetAverageTurnaroundTime()}
+평균 응답 시간: {scheduler.GetAverageResponseTime()}";
         }
     }
 }
