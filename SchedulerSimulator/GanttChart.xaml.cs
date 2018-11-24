@@ -47,6 +47,7 @@ namespace SchedulerSimulator
                 tooltip.AppendLine($"남은 시간: {p.RemainingBurstTime}");
                 var lbl = new TextBlock
                 {
+                    Tag = p,
                     Text = p.Process.ProcessId,
                     TextAlignment = TextAlignment.Center,
                     Width = p.BurstTime * BlockFactor,
