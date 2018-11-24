@@ -52,7 +52,7 @@ namespace SchedulerSimulator
                     TextAlignment = TextAlignment.Center,
                     Width = p.BurstTime * BlockFactor,
                     Height = ActualHeight,
-                    Background = new SolidColorBrush(p.Process.Color),
+                    Background = p.Process.Color,
                     ToolTip = tooltip.ToString().Trim(),
                 };
                 Canvas.SetLeft(lbl, p.DispatchTime * BlockFactor);

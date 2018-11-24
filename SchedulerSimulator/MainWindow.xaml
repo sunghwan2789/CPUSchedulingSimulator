@@ -8,17 +8,47 @@
 
         Title="7가지 알고리즘 프로세스 시뮬레이터" Height="432" Width="717.4">
     <ScrollViewer VerticalScrollBarVisibility="Auto" >
-        <StackPanel Margin="10">
-            <TextBlock x:Name="textBlock" Text="스케줄링 파일" />
+        <StackPanel Margin="10,0,10,10">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Margin" Value="0,10,0,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock x:Name="textBlock" Text="스케줄링 데이터" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="105"/>
+                    <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="textBox3" Grid.Column="0"/>
-                <Button x:Name="button" Content="찾아보기..." Grid.Column="2" Click="button_Click"/>
+                <DataGrid x:Name="editor" AutoGenerateColumns="False" MinHeight="100" Grid.Column="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="프로세스 ID" Binding="{Binding Path=ProcessId}" />
+                        <DataGridTextColumn Header="도착시간" Binding="{Binding Path=ArrivalTime}" />
+                        <DataGridTextColumn Header="서비스시간" Binding="{Binding Path=BurstTime}" />
+                        <DataGridTextColumn Header="우선순위" Binding="{Binding Path=Priority}" />
+                        <DataGridTemplateColumn Header="색상">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Rectangle Fill="{Binding Path=Color}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Column="2">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Margin" Value="0,0,0,10"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button x:Name="button" Content="열기" Click="button_Click"/>
+                    <Button x:Name="btnSave" Content="저장" Click="button_Click"/>
+                    <TextBlock Text="시간 할당량" />
+                    <TextBox x:Name="txtTimeQuantum" />
+                </StackPanel>
             </Grid>
+            <Button x:Name="btnApply" Content="적용" />
 
             <TextBlock x:Name="textBlock1" Text="알고리즘"/>
             <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged">

@@ -46,9 +46,11 @@ namespace SchedulerSimulator
             {
                 // Open document 
                 dataFilename = dlg.FileName;
-                textBox3.Text = dataFilename;
                 var dp = new DataParser(dataFilename);
                 data = dp.Parse();
+
+                editor.ItemsSource = data.Processes;
+                txtTimeQuantum.Text = data.TimeQuantum.ToString();
 
                 tabControl_SelectionChanged(null, null);
             }
@@ -90,11 +92,8 @@ namespace SchedulerSimulator
                 return;
             }
 
-            var colors = new Dictionary<Process, Color>();
-            var rand = new Random();
             foreach (var p in data.Processes)
             {
-                p.Color = Color.FromRgb((byte)rand.Next(0, 255), (byte)rand.Next(0, 255), (byte)rand.Next(0, 255));
                 scheduler.Push(p);
             }
 
