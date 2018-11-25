@@ -20,13 +20,12 @@ namespace SchedulerSimulator
                 Process = process,
             });
         }
+
+        private double Calculate(ProcessControlBlock pcb) => (double)(currentTime - pcb.Process.ArrivalTime) / pcb.Process.BurstTime;
+
         protected override void Dispatch()
         {
-            foreach (var rpcb in readyQueue)
-            {
-                rpcb.Process.Priority = (double)(currentTime - rpcb.Process.ArrivalTime) / rpcb.Process.BurstTime;
-            }
-            readyQueue.Sort(new PriorityCompare());
+            readyQueue.Sort((a, b) => Calculate(a).CompareTo(Calculate(b)));
 
             var before = readyQueue.First();
             readyQueue.RemoveAt(0);
@@ -47,25 +46,6 @@ namespace SchedulerSimulator
             currentTime += pcb.BurstTime;
 
             OnProcessChanged(pcb);
-        }
-
-        private class PriorityCompare : Comparer<ProcessControlBlock>
-        {
-            public override int Compare(ProcessControlBlock x, ProcessControlBlock y)
-            {
-                if (x.Process.Priority == y.Process.Priority)
-                {
-                    return 0;
-                }
-                else if (x.Process.Priority < y.Process.Priority)
-                {
-                    return 1;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
         }
     }
 }
