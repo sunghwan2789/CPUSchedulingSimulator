@@ -25,7 +25,7 @@ namespace SchedulerSimulator
 
         protected override void Dispatch()
         {
-            readyQueue.Sort((a, b) => Calculate(a).CompareTo(Calculate(b)));
+            readyQueue.Sort((a, b) => Calculate(b).CompareTo(Calculate(a)));
 
             var before = readyQueue.First();
             readyQueue.RemoveAt(0);

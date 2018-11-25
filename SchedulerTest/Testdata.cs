@@ -26,7 +26,7 @@ P3 6 3 1
             {
                 var dp = new DataParser(ms);
                 var data = dp.Parse();
-                Processes = data.Processes;
+                Processes = data.Processes.ToArray();
                 TimeQuantum = data.TimeQuantum;
             }
         }

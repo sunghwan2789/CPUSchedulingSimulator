@@ -55,7 +55,7 @@ P3 6 3 1
             {
                 var dp = new DataParser(ms);
                 var data = dp.Parse();
-                Assert.AreEqual(expectedProcess.Length, data.Processes.Length);
+                Assert.AreEqual(expectedProcess.Length, data.Processes.Count);
                 for (var i = 0; i < expectedProcess.Length; i++)
                 {
                     Assert.AreEqual(expectedProcess[i].ProcessId, data.Processes[i].ProcessId);
@@ -112,7 +112,7 @@ P3 4 7 1
             {
                 var dp = new DataParser(ms);
                 var data = dp.Parse();
-                Assert.AreEqual(expectedProcess.Length, data.Processes.Length);
+                Assert.AreEqual(expectedProcess.Length, data.Processes.Count);
                 for (var i = 0; i < expectedProcess.Length; i++)
                 {
                     Assert.AreEqual(expectedProcess[i].ProcessId, data.Processes[i].ProcessId);
@@ -169,7 +169,7 @@ P3 4 7 1
             {
                 var dp = new DataParser(ms);
                 var data = dp.Parse();
-                Assert.AreEqual(expectedProcess.Length, data.Processes.Length);
+                Assert.AreEqual(expectedProcess.Length, data.Processes.Count);
                 for (var i = 0; i < expectedProcess.Length; i++)
                 {
                     Assert.AreEqual(expectedProcess[i].ProcessId, data.Processes[i].ProcessId);
