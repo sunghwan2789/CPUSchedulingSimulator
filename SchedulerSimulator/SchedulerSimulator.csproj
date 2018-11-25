@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CenterConverter.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="DataParser.cs" />
     <Compile Include="DuplicateKeyComparer.cs" />
@@ -63,6 +64,7 @@
       <DependentUpon>GanttChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="HighestResponseRatioNext.cs" />
+    <Compile Include="Mover.cs" />
     <Compile Include="NonPreemptivePriority.cs" />
     <Compile Include="PreemptivePriority.cs" />
     <Compile Include="Process.cs" />
