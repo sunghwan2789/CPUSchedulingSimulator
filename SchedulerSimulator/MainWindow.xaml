@@ -43,7 +43,7 @@
                         </Style>
                     </StackPanel.Resources>
                     <Button x:Name="button" Content="열기" Click="button_Click"/>
-                    <Button x:Name="btnSave" Content="저장" Click="button_Click"/>
+                    <Button Visibility="Hidden" x:Name="btnSave" Content="저장" Click="button_Click"/>
                     <TextBlock Text="시간 할당량" />
                     <TextBox x:Name="txtTimeQuantum" />
                 </StackPanel>
