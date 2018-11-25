@@ -52,13 +52,27 @@
 
             <TextBlock x:Name="textBlock1" Text="알고리즘" Style="{StaticResource Label}"/>
             <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
-                <TabItem Header="FCFS" Padding="30,0" x:Name="fcfs"/>
-                <TabItem Header="SJF" Padding="30,0" x:Name="sjf"/>
-                <TabItem Header="SRT" Padding="30,0" x:Name="srt"/>
-                <TabItem Header="NPPS" Padding="30,0" x:Name="npp"/>
-                <TabItem Header="PPS" Padding="30,0" x:Name="pp"/>
-                <TabItem Header="HRN" Padding="30,0" x:Name="hrn"/>
-                <TabItem Header="RR" Padding="30,0" x:Name="rr"/>
+                <TabItem Header="FCFS" Padding="30,0" x:Name="fcfs">
+                    <Label Content="First Come First Served" FontSize="14" />
+                </TabItem>
+                <TabItem Header="SJF" Padding="30,0" x:Name="sjf">
+                    <Label Content="Shortest Job First" FontSize="14" />
+                </TabItem>
+                <TabItem Header="SRT" Padding="30,0" x:Name="srt">
+                    <Label Content="Shortest Remaining Time First" FontSize="14" />
+                </TabItem>
+                <TabItem Header="NPPS" Padding="30,0" x:Name="npp">
+                    <Label Content="Non-preemptive Priority Scheduling" FontSize="14" />
+                </TabItem>
+                <TabItem Header="PPS" Padding="30,0" x:Name="pp">
+                    <Label Content="Preemptive Priority Scheduling" FontSize="14" />
+                </TabItem>
+                <TabItem Header="HRN" Padding="30,0" x:Name="hrn">
+                    <Label Content="Highest Response Ratio Next" FontSize="14" />
+                </TabItem>
+                <TabItem Header="RR" Padding="30,0" x:Name="rr">
+                    <Label Content="Round-robin" FontSize="14" />
+                </TabItem>
             </TabControl>
             <TextBlock x:Name="textBlock2"  Text="간트 차트" Style="{StaticResource Label}"/>
             <local:GanttChart x:Name="canvaaas" Height="18" Margin="0,0,0,16" Background="#f5f5f5" />
