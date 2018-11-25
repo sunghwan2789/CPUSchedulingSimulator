@@ -22,11 +22,13 @@ namespace SchedulerSimulator
     {
         private string dataFilename { get; set;}
         private Scheduler scheduler = new FirstComeFirstServed();
-        private Data data = new Data { Processes = new Process[0], };
+        private Data data = new Data();
 
         public MainWindow()
         {
             InitializeComponent();
+            editor.ItemsSource = data.Processes;
+            txtTimeQuantum.Text = data.TimeQuantum.ToString();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -59,6 +61,7 @@ namespace SchedulerSimulator
 
         private void RunSimulator()
         {
+            data.TimeQuantum = int.Parse(txtTimeQuantum.Text);
             var tab = (TabItem)tabControl.SelectedItem;
             switch (tab.Name)
             {
@@ -88,7 +91,7 @@ namespace SchedulerSimulator
                     break;
             }
 
-            foreach (var p in data.Processes)
+            foreach (var p in data.Processes.OrderBy(i => i.ArrivalTime))
             {
                 scheduler.Push(p);
             }
@@ -107,8 +110,6 @@ namespace SchedulerSimulator
 
         private void BtnApply_Click(object sender, RoutedEventArgs e)
         {
-            data.Processes = (Process[])editor.ItemsSource;
-            data.TimeQuantum = int.Parse(txtTimeQuantum.Text);
             RunSimulator();
         }
     }

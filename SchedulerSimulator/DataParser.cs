@@ -26,20 +26,11 @@ namespace SchedulerSimulator
             var ret = new Data();
             using (var sr = new StreamReader(stream))
             {
-                ret.Processes = new Process[int.Parse(sr.ReadLine())];
-                for (var i = 0; i < ret.Processes.Length; i++)
+                var processCount = int.Parse(sr.ReadLine());
+                ret.Processes = new List<Process>();
+                for (var i = 0; i < processCount; i++)
                 {
-                    var process = Process.Parse(sr.ReadLine());
-                    var k = i;
-                    for (var j = i - 1; j >= 0; j--)
-                    {
-                        if (ret.Processes[j].ArrivalTime > process.ArrivalTime)
-                        {
-                            ret.Processes[j + 1] = ret.Processes[j];
-                            k = j;
-                        }
-                    }
-                    ret.Processes[k] = process;
+                    ret.Processes.Add(Process.Parse(sr.ReadLine()));
                 }
                 ret.TimeQuantum = int.Parse(sr.ReadLine());
             }

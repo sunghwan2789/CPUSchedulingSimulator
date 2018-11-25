@@ -8,7 +8,7 @@ namespace SchedulerSimulator
 {
     public class Data
     {
-        public Process[] Processes { get; set; }
-        public int TimeQuantum { get; set; }
+        public List<Process> Processes { get; set; } = new List<Process>();
+        public int TimeQuantum { get; set; } = 1;
     }
 }
