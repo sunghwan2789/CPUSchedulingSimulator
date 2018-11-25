@@ -27,7 +27,7 @@ namespace SchedulerSimulator
         /// <summary>
         /// 우선순위
         /// </summary>
-        public double Priority { get; set; }
+        public int Priority { get; set; }
 
         /// <summary>
         /// 프로세스 표시 색상
@@ -55,7 +55,7 @@ namespace SchedulerSimulator
                 ProcessId = data[0],
                 ArrivalTime = int.Parse(data[1]),
                 BurstTime = int.Parse(data[2]),
-                Priority = double.Parse(data[3]),
+                Priority = int.Parse(data[3]),
                 Color = new SolidColorBrush(System.Windows.Media.Color.FromRgb(rgb[0], rgb[1], rgb[2])),
         };
         }

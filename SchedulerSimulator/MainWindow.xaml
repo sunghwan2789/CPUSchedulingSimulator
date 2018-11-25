@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:SchedulerSimulator"
         mc:Ignorable="d"
 
-        Title="7가지 알고리즘 프로세스 시뮬레이터" Height="432" Width="717.4">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" >
+        Title="7가지 알고리즘 프로세스 시뮬레이터" Height="576" Width="768">
+    <ScrollViewer>
         <StackPanel Margin="10,0,10,10">
             <StackPanel.Resources>
-                <Style TargetType="{x:Type TextBlock}">
+                <Style TargetType="{x:Type TextBlock}" x:Key="Label">
                     <Setter Property="Margin" Value="0,10,0,0"/>
                 </Style>
             </StackPanel.Resources>
-            <TextBlock x:Name="textBlock" Text="스케줄링 데이터" />
+            <TextBlock x:Name="textBlock" Text="스케줄링 데이터" Style="{StaticResource Label}" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -50,19 +50,19 @@
             </Grid>
             <Button x:Name="btnApply" Content="적용" Click="BtnApply_Click" />
 
-            <TextBlock x:Name="textBlock1" Text="알고리즘"/>
+            <TextBlock x:Name="textBlock1" Text="알고리즘" Style="{StaticResource Label}"/>
             <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
                 <TabItem Header="FCFS" Padding="30,0" x:Name="fcfs"/>
                 <TabItem Header="SJF" Padding="30,0" x:Name="sjf"/>
                 <TabItem Header="SRT" Padding="30,0" x:Name="srt"/>
-                <TabItem Header="비선점 Priority" Padding="30,0" x:Name="npp"/>
-                <TabItem Header="선점 Priority" Padding="30,0" x:Name="pp"/>
+                <TabItem Header="NPPS" Padding="30,0" x:Name="npp"/>
+                <TabItem Header="PPS" Padding="30,0" x:Name="pp"/>
                 <TabItem Header="HRN" Padding="30,0" x:Name="hrn"/>
                 <TabItem Header="RR" Padding="30,0" x:Name="rr"/>
             </TabControl>
-            <TextBlock x:Name="textBlock2"  Text="간트 차트"/>
+            <TextBlock x:Name="textBlock2"  Text="간트 차트" Style="{StaticResource Label}"/>
             <local:GanttChart x:Name="canvaaas" Height="23" Background="#f5f5f5" />
-            <TextBlock x:Name="textBlock3"  Text="프로세스별 시간 정보"/>
+            <TextBlock x:Name="textBlock3"  Text="프로세스별 시간 정보" Style="{StaticResource Label}"/>
             <ListView x:Name="listView">
                 <ListView.View>
                     <GridView>

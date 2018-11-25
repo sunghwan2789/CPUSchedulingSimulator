@@ -8,7 +8,7 @@ namespace SchedulerSimulator
 {
     public class PreemptivePriority : Scheduler
     {
-        private readonly SortedList<double, ProcessControlBlock> readyQueue = new SortedList<double, ProcessControlBlock>(new DuplicateKeyComparer<double>());
+        private readonly SortedList<int, ProcessControlBlock> readyQueue = new SortedList<int, ProcessControlBlock>(new DuplicateKeyComparer<int>());
         private ProcessControlBlock lastProcess = null;
 
         protected override bool Busy => readyQueue.Any();
