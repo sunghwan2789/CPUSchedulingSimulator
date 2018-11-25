@@ -68,7 +68,7 @@
                     <Label Content="Preemptive Priority Scheduling" FontSize="14" />
                 </TabItem>
                 <TabItem Header="HRN" Padding="30,0" x:Name="hrn">
-                    <Label Content="Highest Response Ratio Next" FontSize="14" />
+                    <Label Content="Highest Response-ratio Next" FontSize="14" />
                 </TabItem>
                 <TabItem Header="RR" Padding="30,0" x:Name="rr">
                     <Label Content="Round-robin" FontSize="14" />
