@@ -8,11 +8,73 @@ namespace SchedulerSimulator
 {
     public class ShortestRemainingTimeFirst : Scheduler
     {
-        private readonly SortedList<int, ProcessControlBlock> readyQueue = new SortedList<int, ProcessControlBlock>();
+        private readonly SortedList<int, ProcessControlBlock> readyQueue = new SortedList<int, ProcessControlBlock>(new DuplicateKeyComparer<int>());
+        private ProcessControlBlock lastProcess = null;
 
-        protected override bool Busy => throw new NotImplementedException();
+        protected override bool Busy => readyQueue.Any();
 
-        public override void Push(Process process) => throw new NotImplementedException();
-        protected override void Dispatch() => throw new NotImplementedException();
+        public override void Push(Process process)
+        {
+            base.Push(process);
+            readyQueue.Add(process.BurstTime, new ProcessControlBlock
+            {
+                Process = process,
+                RemainingBurstTime = process.BurstTime,
+            });
+        }
+        protected override void Dispatch()
+        {
+            if (lastProcess != null)
+            {
+                if (lastProcess != readyQueue.First().Value)
+                {
+                    readyQueue.RemoveAt(readyQueue.IndexOfValue(lastProcess));
+                    readyQueue.Add(lastProcess.RemainingBurstTime, (ProcessControlBlock)lastProcess.Clone());
+
+                    OnProcessChanged(lastProcess);
+                    lastProcess = null;
+                    return;
+                }
+                else
+                {
+                    lastProcess.BurstTime++;
+                    currentTime++;
+                    lastProcess.RemainingBurstTime--;
+                    if (lastProcess.RemainingBurstTime > 0)
+                    {
+                        return;
+                    }
+
+                    readyQueue.RemoveAt(readyQueue.IndexOfValue(lastProcess));
+
+                    OnProcessChanged(lastProcess);
+                    lastProcess = null;
+                    return;
+                }
+            }
+
+            var pcb = lastProcess = readyQueue.First().Value;
+            var process = pcb.Process;
+
+            // 프로세스 도착 시간까지 현재 시간을 진행
+            if (currentTime < process.ArrivalTime)
+            {
+                currentTime = process.ArrivalTime;
+            }
+
+            if (pcb.Initial)
+            {
+                pcb.ResponseTime = currentTime - process.ArrivalTime;
+                pcb.WaitingTime = currentTime - process.ArrivalTime;
+            }
+            else
+            {
+                pcb.WaitingTime += currentTime - pcb.EndTime;
+            }
+
+            pcb.DispatchTime = currentTime;
+
+            pcb.BurstTime = 0;
+        }
     }
 }
