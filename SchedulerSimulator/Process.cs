@@ -32,9 +32,16 @@ namespace SchedulerSimulator
         /// <summary>
         /// 프로세스 표시 색상
         /// </summary>
-        public Brush Color { get; set; }
+        public Brush Color { get; set; } = new SolidColorBrush(RandomColor());
 
         private static Random RNG = new Random();
+
+        private static Color RandomColor()
+        {
+            var hslColor = new HSLColor(RNG.NextDouble() * 240, 240, RNG.Next(75, 90) / 100.0 * 240);
+            var color = (System.Drawing.Color)hslColor;
+            return System.Windows.Media.Color.FromRgb(color.R, color.G, color.B);
+        }
 
         /// <summary>
         /// 데이터 줄에서 프로세스 정보를 읽는다.
@@ -44,20 +51,13 @@ namespace SchedulerSimulator
         public static Process Parse(string line)
         {
             var data = line.Split(' ');
-            var rgb = new byte[3];
-            RNG.NextBytes(rgb);
-            if (data.Length > 4)
-            {
-                rgb = data[4].Split(' ').Select(byte.Parse).ToArray();
-            }
             return new Process
             {
                 ProcessId = data[0],
                 ArrivalTime = int.Parse(data[1]),
                 BurstTime = int.Parse(data[2]),
                 Priority = int.Parse(data[3]),
-                Color = new SolidColorBrush(System.Windows.Media.Color.FromRgb(rgb[0], rgb[1], rgb[2])),
-        };
+            };
         }
     }
 }
