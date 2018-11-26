@@ -28,7 +28,7 @@ namespace SchedulerSimulator
         }
 
         private IEnumerable<ProcessControlBlock> Context => DataContext as IEnumerable<ProcessControlBlock>;
-        private double BlockFactor => ActualWidth / Context.Last().EndTime;
+        private double BlockFactor => Context.Last().EndTime > 0 ? ActualWidth / Context.Last().EndTime : ActualWidth;
 
         private void GanttChart_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
