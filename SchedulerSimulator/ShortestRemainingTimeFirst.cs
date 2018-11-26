@@ -33,24 +33,21 @@ namespace SchedulerSimulator
 
                     OnProcessChanged(lastProcess);
                     lastProcess = null;
-                    return;
+                }
+                else if (lastProcess.RemainingBurstTime == 0)
+                {
+                    readyQueue.RemoveAt(readyQueue.IndexOfValue(lastProcess));
+
+                    OnProcessChanged(lastProcess);
+                    lastProcess = null;
                 }
                 else
                 {
                     lastProcess.BurstTime++;
                     currentTime++;
                     lastProcess.RemainingBurstTime--;
-                    if (lastProcess.RemainingBurstTime > 0)
-                    {
-                        return;
-                    }
-
-                    readyQueue.RemoveAt(readyQueue.IndexOfValue(lastProcess));
-
-                    OnProcessChanged(lastProcess);
-                    lastProcess = null;
-                    return;
                 }
+                return;
             }
 
             var pcb = lastProcess = readyQueue.First().Value;
