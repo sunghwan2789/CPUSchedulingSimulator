@@ -30,7 +30,10 @@ namespace SchedulerSimulator
                 if (lastProcess != readyQueue.First().Value)
                 {
                     readyQueue.RemoveAt(readyQueue.IndexOfValue(lastProcess));
-                    readyQueue.Add(lastProcess.Process.Priority, (ProcessControlBlock)lastProcess.Clone());
+                    if (lastProcess.RemainingBurstTime > 0)
+                    {
+                        readyQueue.Add(lastProcess.Process.Priority, (ProcessControlBlock)lastProcess.Clone());
+                    }
 
                     OnProcessChanged(lastProcess);
                     lastProcess = null;
