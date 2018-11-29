@@ -26,7 +26,7 @@ namespace SchedulerSimulator
         {
             if (lastProcess != null)
             {
-                if (lastProcess != readyQueue.First().Value)
+                if (lastProcess.RemainingBurstTime > readyQueue.First().Value.RemainingBurstTime)
                 {
                     readyQueue.RemoveAt(readyQueue.IndexOfValue(lastProcess));
                     if (lastProcess.RemainingBurstTime > 0)
