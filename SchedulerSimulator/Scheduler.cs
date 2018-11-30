@@ -12,9 +12,9 @@ namespace SchedulerSimulator
         protected int lastArrivalTime = 0;
         protected readonly List<ProcessControlBlock> result = new List<ProcessControlBlock>();
 
-        public Action<ProcessControlBlock> Dispatched;
-        public Action<ProcessControlBlock> Timeout;
-        public Action<ProcessControlBlock> Completed;
+        //public Action<ProcessControlBlock> Dispatched;
+        //public Action<ProcessControlBlock> Timeout;
+        //public Action<ProcessControlBlock> Completed;
 
         /// <summary>
         /// CPU가 처리하는 프로세스가 변경되었을 때 실행할 메서드
@@ -91,12 +91,8 @@ namespace SchedulerSimulator
             })
             .OrderBy(i => i.Process.ArrivalTime);
 
-        public int GetTotalResponseTime() => GetFinalResult().Sum(i => i.ResponseTime);
-        public int GetTotalWaitingTime() => GetFinalResult().Sum(i => i.WaitingTime);
-        public int GetTotalTurnaroundTime() => GetFinalResult().Sum(i => i.TurnaroundTime);
-
-        public double GetAverageResponseTime() => (double)GetTotalResponseTime() / GetFinalResult().Count();
-        public double GetAverageWaitingTime() => (double)GetTotalWaitingTime() / GetFinalResult().Count();
-        public double GetAverageTurnaroundTime() => (double)GetTotalTurnaroundTime() / GetFinalResult().Count();
+        public double GetAverageResponseTime() => GetFinalResult().Average(i => i.ResponseTime);
+        public double GetAverageWaitingTime() => GetFinalResult().Average(i => i.WaitingTime);
+        public double GetAverageTurnaroundTime() => GetFinalResult().Average(i => i.TurnaroundTime);
     }
 }
