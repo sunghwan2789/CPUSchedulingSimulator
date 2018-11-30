@@ -91,8 +91,8 @@ namespace SchedulerSimulator
             })
             .OrderBy(i => i.Process.ArrivalTime);
 
-        public double GetAverageResponseTime() => GetFinalResult().Average(i => i.ResponseTime);
-        public double GetAverageWaitingTime() => GetFinalResult().Average(i => i.WaitingTime);
-        public double GetAverageTurnaroundTime() => GetFinalResult().Average(i => i.TurnaroundTime);
+        public double GetAverageResponseTime() => GetResult().Any() ? GetFinalResult().Average(i => i.ResponseTime) : double.NaN;
+        public double GetAverageWaitingTime() => GetResult().Any() ? GetFinalResult().Average(i => i.WaitingTime) : double.NaN;
+        public double GetAverageTurnaroundTime() => GetResult().Any() ? GetFinalResult().Average(i => i.TurnaroundTime) : double.NaN;
     }
 }
