@@ -10,32 +10,42 @@ namespace SchedulerSimulator
     {
         protected int currentTime = 0;
         protected int lastArrivalTime = 0;
+        protected ProcessControlBlock workingPcb = null;
         protected readonly List<ProcessControlBlock> result = new List<ProcessControlBlock>();
-
-        //public Action<ProcessControlBlock> Dispatched;
-        //public Action<ProcessControlBlock> Timeout;
-        //public Action<ProcessControlBlock> Completed;
-
-        /// <summary>
-        /// CPU가 처리하는 프로세스가 변경되었을 때 실행할 메서드
-        /// </summary>
-        public Action<ProcessControlBlock> ProcessChanged;
-
-        /// <summary>
-        /// CPU가 처리하는 프로세스가 변경되면 result에 PCB를
-        /// 추가하고 ProcessChanged를 실행한다.
-        /// </summary>
-        /// <param name="pcb"></param>
-        protected void OnProcessChanged(ProcessControlBlock pcb)
-        {
-            result.Add(pcb);
-            ProcessChanged?.Invoke(pcb);
-        }
 
         /// <summary>
         /// 준비 큐에 프로세스가 남았는지 확인한다.
         /// </summary>
-        protected abstract bool Busy { get; }
+        protected virtual bool IsBusy => workingPcb != null;
+
+        /// <summary>
+        /// Dispatch가 필요한지를 확인한다.
+        /// </summary>
+        protected abstract bool ShouldDispatch { get; }
+
+        /// <summary>
+        /// 준비 큐에 CPU가 처리할 프로세스를 추가한다.
+        /// </summary>
+        /// <param name="process"></param>
+        public abstract void Push(Process process);
+
+        protected void OnPush(Process process)
+        {
+            // 이전에 동시에 도착한 프로세스를 먼저 실행
+            if (lastArrivalTime < process.ArrivalTime)
+            {
+                while (IsBusy && currentTime < process.ArrivalTime)
+                {
+                    if (ShouldDispatch)
+                    {
+                        Dispatch();
+                    }
+                    Execute();
+                }
+            }
+            // 마지막 도착 시간을 설정하여 동시 도착 작업 처리
+            lastArrivalTime = process.ArrivalTime;
+        }
 
         /// <summary>
         /// CPU가 프로세스를 처리하도록 준비 큐에서 PCB를 뽑아
@@ -43,22 +53,54 @@ namespace SchedulerSimulator
         /// </summary>
         protected abstract void Dispatch();
 
-        /// <summary>
-        /// 준비 큐에 CPU가 처리할 프로세스를 추가한다.
-        /// </summary>
-        /// <param name="process"></param>
-        public virtual void Push(Process process)
+        protected virtual void OnDispatch(ProcessControlBlock pcb)
         {
-            // 이전에 동시에 도착한 프로세스를 먼저 실행
-            if (lastArrivalTime < process.ArrivalTime)
+            // 프로세스 도착 시간까지 현재 시간을 진행
+            if (currentTime < pcb.Process.ArrivalTime)
             {
-                while (Busy && currentTime < process.ArrivalTime)
-                {
-                    Dispatch();
-                }
+                currentTime = pcb.Process.ArrivalTime;
             }
-            // 마지막 도착 시간을 설정하여 동시 도착 작업 처리
-            lastArrivalTime = process.ArrivalTime;
+
+            if (pcb.IsInitial)
+            {
+                pcb.ResponseTime = currentTime - pcb.Process.ArrivalTime;
+                pcb.WaitingTime = pcb.ResponseTime;
+            }
+            else
+            {
+                pcb.WaitingTime += currentTime - pcb.EndTime;
+            }
+
+            pcb.DispatchTime = currentTime;
+            pcb.BurstTime = 0;
+
+            workingPcb = pcb;
+        }
+
+        /// <summary>
+        /// Dispatch로 실행 상태로 바꾼 프로세스를 실행한다.
+        /// </summary>
+        protected void Execute()
+        {
+            workingPcb.BurstTime++;
+            currentTime++;
+            workingPcb.RemainingBurstTime--;
+            // 남은 실행 시간이 없으면 실행 종료
+            if (workingPcb.RemainingBurstTime == 0)
+            {
+                Timeout();
+            }
+        }
+
+        /// <summary>
+        /// CPU가 처리하는 프로세스가 종료되거나 준비 상태로 돌아가면
+        /// result에 PCB를 추가하고 workingPcb를 비운다.
+        /// </summary>
+        /// <param name="pcb"></param>
+        protected void Timeout()
+        {
+            result.Add(workingPcb);
+            workingPcb = null;
         }
 
         /// <summary>
@@ -68,9 +110,13 @@ namespace SchedulerSimulator
         public List<ProcessControlBlock> GetResult()
         {
             // 처리 대기 중인 프로세스를 마저 처리
-            while (Busy)
+            while (IsBusy)
             {
-                Dispatch();
+                if (ShouldDispatch)
+                {
+                    Dispatch();
+                }
+                Execute();
             }
             // 시현 결과 반환
             return result;

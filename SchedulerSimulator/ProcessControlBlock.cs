@@ -16,7 +16,7 @@ namespace SchedulerSimulator
         /// <summary>
         /// 첫 번째 실행 여부
         /// </summary>
-        public bool Initial { get; private set; } = true;
+        public bool IsInitial { get; private set; } = true;
 
         /// <summary>
         /// 작업을 실행하기 시작한 시각
@@ -64,7 +64,7 @@ namespace SchedulerSimulator
         public object Clone() => new ProcessControlBlock
         {
             Process = Process,
-            Initial = false,
+            IsInitial = false,
             DispatchTime = DispatchTime,
             BurstTime = BurstTime,
             RemainingBurstTime = RemainingBurstTime,

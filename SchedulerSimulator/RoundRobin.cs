@@ -14,13 +14,15 @@ namespace SchedulerSimulator
         public int TimeQuantum { get; set; }
 
         private readonly Queue<ProcessControlBlock> readyQueue = new Queue<ProcessControlBlock>();
-        private ProcessControlBlock lastDispatch = null;
 
-        protected override bool Busy => readyQueue.Any() || lastDispatch != null;
+        protected override bool IsBusy => base.IsBusy || readyQueue.Any();
+        protected override bool ShouldDispatch => 
+            workingPcb == null
+            || workingPcb.BurstTime == TimeQuantum;
 
         public override void Push(Process process)
         {
-            base.Push(process);
+            OnPush(process);
             readyQueue.Enqueue(new ProcessControlBlock
             {
                 Process = process,
@@ -30,44 +32,15 @@ namespace SchedulerSimulator
 
         protected override void Dispatch()
         {
-            if (lastDispatch != null)
+            if (workingPcb != null)
             {
-                readyQueue.Enqueue(lastDispatch);
-                lastDispatch = null;
+                if (workingPcb.RemainingBurstTime > 0)
+                {
+                    readyQueue.Enqueue((ProcessControlBlock)workingPcb.Clone());
+                }
+                Timeout();
             }
-
-            var before = readyQueue.Dequeue();
-            var pcb = (ProcessControlBlock)before.Clone();
-            var process = pcb.Process;
-
-            // 프로세스 도착 시간까지 현재 시간을 진행
-            if (currentTime < process.ArrivalTime)
-            {
-                currentTime = process.ArrivalTime;
-            }
-
-            if (before.Initial)
-            {
-                pcb.ResponseTime = currentTime - process.ArrivalTime;
-                pcb.WaitingTime = currentTime - process.ArrivalTime;
-            }
-            else
-            {
-                pcb.WaitingTime += currentTime - before.EndTime;
-            }
-
-            pcb.DispatchTime = currentTime;
-
-            pcb.BurstTime = Math.Min(TimeQuantum, pcb.RemainingBurstTime);
-            currentTime += pcb.BurstTime;
-            pcb.RemainingBurstTime -= pcb.BurstTime;
-
-            OnProcessChanged(pcb);
-
-            if (pcb.RemainingBurstTime > 0)
-            {
-                lastDispatch = pcb;
-            }
+            OnDispatch(readyQueue.Dequeue());
         }
     }
 }
