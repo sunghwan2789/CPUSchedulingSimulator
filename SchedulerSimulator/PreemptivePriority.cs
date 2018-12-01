@@ -31,7 +31,7 @@ namespace SchedulerSimulator
             {
                 if (workingPcb.RemainingBurstTime > 0)
                 {
-                    readyQueue.Add(workingPcb.Process.Priority, (ProcessControlBlock)workingPcb.Clone());
+                    readyQueue.Add(workingPcb.Process.Priority, workingPcb.Clone());
                 }
                 Timeout();
             }

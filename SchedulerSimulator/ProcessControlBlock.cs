@@ -61,7 +61,7 @@ namespace SchedulerSimulator
 
         private int? turnaroundTime = null;
 
-        public object Clone() => new ProcessControlBlock
+        public ProcessControlBlock Clone() => new ProcessControlBlock
         {
             Process = Process,
             IsInitial = false,
@@ -71,5 +71,7 @@ namespace SchedulerSimulator
             ResponseTime = ResponseTime,
             WaitingTime = WaitingTime,
         };
+
+        object ICloneable.Clone() => Clone();
     }
 }

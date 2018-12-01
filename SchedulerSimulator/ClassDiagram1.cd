@@ -8,14 +8,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SchedulerSimulator.HighestResponseRatioNext">
-    <Position X="14.25" Y="12.75" Width="1.75" />
+    <Position X="14.5" Y="12.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAAAAAAAAAAAAAIDAACAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>HighestResponseRatioNext.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchedulerSimulator.MainWindow" BaseTypeListCollapsed="true">
-    <Position X="12.5" Y="5.25" Width="2.75" />
+    <Position X="12.25" Y="5.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAABAAIAAAIAAAAIAAAAAAAAAAABAABAAAAQAAAAAAA=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
@@ -23,36 +23,36 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchedulerSimulator.NonPreemptivePriority">
-    <Position X="7" Y="12.75" Width="2.25" />
+    <Position X="7.25" Y="12.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAAAAAAAAAAAAAIDAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>NonPreemptivePriority.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchedulerSimulator.PreemptivePriority">
-    <Position X="9.5" Y="12.75" Width="2.25" />
+    <Position X="9.75" Y="12.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAAAAAAAAAAAAAIDAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>PreemptivePriority.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchedulerSimulator.Process">
-    <Position X="10.75" Y="1.25" Width="2" />
+    <Position X="10.5" Y="1.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAoAAAEAAAAAAAEAAAAEAAAAAAAUAAAAAAAgAAAAAA=</HashCode>
       <FileName>Process.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchedulerSimulator.ProcessControlBlock" BaseTypeListCollapsed="true">
-    <Position X="13.25" Y="1.25" Width="2" />
+    <Position X="12.75" Y="1.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>BAAAAAkEAAAAAAAAAgAAAAAAAAAgAABBAAAAgAQAABA=</HashCode>
+      <HashCode>BAAAAAkEAAAAAAAIAgAAAAAAAAAgAABBAAAAgAQAABA=</HashCode>
       <FileName>ProcessControlBlock.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchedulerSimulator.RoundRobin">
-    <Position X="12" Y="12.75" Width="2" />
+    <Position X="12.25" Y="12.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAAAAAEAAAAAAAIDAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>RoundRobin.cs</FileName>
